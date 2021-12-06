@@ -27,17 +27,17 @@ type hchan struct {
 }
 ```
 
-- `qcount`__chan中元素数量__
-- `datasiz`__底层循环数组的长度__
-- `buf`__指向底层循环数组的指针，只针对有缓冲的chan__
-- `elemsize`__chan中元素大小__
-- `closed`__chan是否关闭的标志__
-- `elemtype`__chan中元素类型__
-- `sendx`__已发送元素在循环数组中的索引__
-- `recvx`__已接收元素在循环数组中的索引__
-- `sendq`__等待发送的goroutine队列(双向链表)__
-- `recvq`__等待接受的goroutine队列(双向链表)__
-- `lock`__锁__
+- `qcount`**chan中元素数量**
+- `datasiz`**底层循环数组的长度**
+- `buf`**指向底层循环数组的指针，只针对有缓冲的chan**
+- `elemsize`**chan中元素大小**
+- `closed`**chan是否关闭的标志**
+- `elemtype`**chan中元素类型**
+- `sendx`**已发送元素在循环数组中的索引**
+- `recvx`**已接收元素在循环数组中的索引**
+- `sendq`**等待发送的goroutine队列(双向链表)**
+- `recvq`**等待接受的goroutine队列(双向链表)**
+- `lock`**锁**
 
 ### waitq
 
@@ -180,7 +180,7 @@ if !block && c.closed == 0 &&
 }
 ```
 
-__非阻塞性且未关闭channel__满足以下其中一个条件：
+**非阻塞性且未关闭channel**满足以下其中一个条件：
 
 - 不存在`buffer`，同时`recvq`为空
 - 存在`buffer`，并且`buffer`已满
@@ -323,7 +323,7 @@ func sendDirect(t *_type, sg *sudog, src unsafe.Pointer) {
 
 - `src`当前`goroutine`的栈地址
 
-`GC`假设对栈的写操作只能发生在`goroutine`正在运行中并且由当前`goroutine`来写，而`sendDirect`违反了这个假设，试图通过`memmove`直接修改`receiver`的栈，如果在获取了目标`goroutine`的栈地址后，发生了__栈收缩__，必然会破坏内存，所以需要增加一个写屏障`Write Barrier`
+`GC`假设对栈的写操作只能发生在`goroutine`正在运行中并且由当前`goroutine`来写，而`sendDirect`违反了这个假设，试图通过`memmove`直接修改`receiver`的栈，如果在获取了目标`goroutine`的栈地址后，发生了**栈收缩**，必然会破坏内存，所以需要增加一个写屏障`Write Barrier`
 
 _PS: 收缩栈是在mgcmark.go中触发的，主要是在scanstack和markrootFreeGStacks函数中，也就是垃圾回收的时候会根据情况收缩栈_
 
@@ -377,7 +377,7 @@ if !block && (
 }
 ```
 
-__非阻塞性__满足以下其中一个条件：
+**非阻塞性**满足以下其中一个条件：
 
 - 不存在`buffer`，同时`sendq`为空
 - 存在`buffer`，并且`buffer`为空
