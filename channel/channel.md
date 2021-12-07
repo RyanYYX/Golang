@@ -1,5 +1,7 @@
 # Go Channel
 
+[toc]
+
 ## 数据结构
 
 ### hchan
@@ -27,17 +29,27 @@ type hchan struct {
 }
 ```
 
-- `qcount`**chan中元素数量**
-- `datasiz`**底层循环数组的长度**
-- `buf`**指向底层循环数组的指针，只针对有缓冲的chan**
-- `elemsize`**chan中元素大小**
-- `closed`**chan是否关闭的标志**
-- `elemtype`**chan中元素类型**
-- `sendx`**已发送元素在循环数组中的索引**
-- `recvx`**已接收元素在循环数组中的索引**
-- `sendq`**等待发送的goroutine队列(双向链表)**
-- `recvq`**等待接受的goroutine队列(双向链表)**
-- `lock`**锁**
+`qcount`chan中元素数量
+
+`datasiz`底层循环数组的长度
+
+`buf`指向底层循环数组的指针，只针对有缓冲的chan
+
+`elemsize`chan中元素大小
+
+`closed`chan是否关闭的标志
+
+`elemtype`chan中元素类型
+
+`sendx`已发送元素在循环数组中的索引
+
+`recvx`已接收元素在循环数组中的索引
+
+`sendq`等待发送的goroutine队列(双向链表)
+
+`recvq`等待接受的goroutine队列(双向链表)
+
+`lock`锁
 
 ### waitq
 
