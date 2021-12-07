@@ -1,6 +1,28 @@
 # Go Channel
 
-[toc]
+- [Go Channel](#go-channel)
+  * [数据结构](#数据结构)
+    + [hchan](#hchan)
+    + [waitq](#waitq)
+    + [sudog](#sudog)
+    + [图解](#图解)
+  * [源码分析](#源码分析)
+    + [makechan](#makechan)
+      - [流程图](#makechan流程图)
+    + [chansend](#chansend)
+      - [流程图](#chansend流程图)
+      - [核心方法---send](#核心方法---send)
+      - [核心方法---sendDirect](#核心方法---senddirect)
+    + [chanrecv](#chanrecv)
+      - [流程图](#chanrecv流程图)
+      - [核心方法---recv](#核心方法---recv)
+      - [核心方法---recvDirect](#核心方法---recvdirect)
+    + [closechan](#closechan)
+      - [流程图](#closechan流程图)
+    + [非阻塞发送和非阻塞接受](#非阻塞发送和非阻塞接受)
+      - [非阻塞发送---selectnbsend](#非阻塞发送---selectnbsend)
+      - [非阻塞发送---selectngrecv](#非阻塞发送---selectngrecv)
+  * [图解循环队列](#图解循环队列)
 
 ## 数据结构
 
@@ -110,7 +132,7 @@ type sudog struct {
 
 ### makechan
 
-#### 流程图
+#### makechan流程图
 
 ![](https://tva1.sinaimg.cn/large/008i3skNly1gwo4f9rn6cj31da0m8ace.jpg)
 
@@ -157,7 +179,7 @@ default:
 
 ### chansend
 
-#### 流程图
+#### chansend流程图
 
 ![](https://tva1.sinaimg.cn/large/008i3skNly1gx46cgz1l1j317f0u0juc.jpg)
 
@@ -341,7 +363,7 @@ _PS: 收缩栈是在mgcmark.go中触发的，主要是在scanstack和markrootFre
 
 ### chanrecv
 
-#### 流程图
+#### chanrecv流程图
 
 ![](https://tva1.sinaimg.cn/large/008i3skNly1gx46amomi3j317q0tmn0d.jpg)
 
@@ -571,7 +593,7 @@ func recvDirect(t *_type, sg *sudog, dst unsafe.Pointer) {
 
 ### closechan
 
-#### 流程图
+#### closechan流程图
 
 ![](https://tva1.sinaimg.cn/large/008i3skNly1gx48x37kc6j30z80ns40h.jpg)
 
