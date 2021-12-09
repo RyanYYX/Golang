@@ -219,6 +219,16 @@ if !block && c.closed == 0 &&
 - 存在`buffer`，并且`buffer`已满
 
 ```go
+lock(&c.lock)
+
+if c.closed != 0 {
+	unlock(&c.lock)
+	panic(plainError("send on closed channel"))
+}
+```
+如果向一个`closed`的`channel`发送数据，直接`panic`
+
+```go
 if sg := c.recvq.dequeue(); sg != nil {
 	// Found a waiting receiver. We pass the value we want to send
 	// directly to the receiver, bypassing the channel buffer (if any).
