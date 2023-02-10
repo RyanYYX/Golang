@@ -58,3 +58,10 @@ func TestRadix(t *testing.T) {
 	radixSort(nums)
 	fmt.Print(nums)
 }
+
+func TestCounting(t *testing.T) {
+	nums := []int{30, 20, 40, 10, 50, 1, 5, 9, 41, 67, 31, 77}
+	countingSort(nums)
+	fmt.Print(nums)
+}
+
