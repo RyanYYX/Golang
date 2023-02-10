@@ -32,12 +32,14 @@ func (check TypeCheck) Check(target reflect.Type) error {
 }
 
 type Stack interface {
+	Empty() bool
 	Pop() interface{}
 	Peek() interface{}
 	Push(val Object) error
 }
 
 type Queue interface {
+	Empty() bool
 	Poll() interface{}
 	Element() interface{}
 	Push(val Object) error
