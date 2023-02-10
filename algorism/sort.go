@@ -192,6 +192,7 @@ func radixSort(nums []int) {
 	}
 }
 
+// 计数排序
 func countingSort(nums []int) {
 	var (
 		max     int = math.MinInt64
